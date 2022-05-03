@@ -1,0 +1,24 @@
+{
+  "window.title": "${rootName}",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/typings": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/publish": true,
+    "**/.gitkeep": true,
+    "**/index.ts": false
+  },
+  "explorerExclude.backup": null,
+  "scss.lint.emptyRules": "ignore",
+  "scss.lint.importStatement": "ignore",
+  "scss.lint.boxModel": "ignore",
+  "scss.lint.important": "ignore",
+  "scss.lint.hexColorLength": "ignore",
+}

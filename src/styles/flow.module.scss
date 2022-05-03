@@ -1,0 +1,8 @@
+@use './palette';
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: 1024px;
+}

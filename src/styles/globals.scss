@@ -1,0 +1,169 @@
+@use 'sass:list';
+@use 'sass:map';
+@use './palette';
+
+$app-background-color: palette.$palette-grey-100;
+$canvas-background-color: palette.$palette-grey-100;
+
+@mixin seq {
+    display: flex;
+    align-items: center;
+    margin-inline: .5rem;
+    flex-direction: column;
+}
+
+@mixin config-panel {
+    padding: .5rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $canvas-background-color;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none !important;
+}
+
+i {
+    font-style: normal;
+    cursor: pointer;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@mixin pseudo($loc: before, $content: '', $pos: absolute) {
+    position: relative;
+
+    &::#{$loc} {
+        content: $content;
+        position: $pos !important;
+        @content;
+    }
+}
+
+@mixin hover-lift() {
+    transition: transform 350ms ease-in-out;
+    box-shadow: 0 .25em .5em 0 rgba(black, .2);
+
+    @include pseudo($loc: after) {
+        box-shadow: 0 0 1.25em 0 rgba(black, .4);
+        transition: transform 350ms ease-in-out;
+        opacity: 0;
+    }
+
+    &:hover,
+    &:focus {
+        transform: scale(1.05);
+
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+
+.flow_row {
+    display: flex;
+    grid-gap: 3rem;
+    gap: 3rem;
+    width: 100%;
+}
+
+.flow_seq {
+    border: 1px solid transparent;
+}
+
+.flow_canvas,
+.flow_seq {
+    position: relative;
+    z-index: 1;
+    display: flex !important;
+    align-items: center !important;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    flex-direction: column;
+}
+
+.flow_canvas {
+    margin-top: auto !important;
+}
+
+@import url('https://resources-81e0a.web.app/animate-util.css');
+
+@mixin animate-transition($properties, $duration) {
+    $props: ();
+    $duration: unquote($duration);
+
+    @each $p in $properties {
+        $props: append($props, $p $duration, comma);
+    }
+
+    -moz-transition: $props,
+    -moz-transform $duration;
+    -webkit-transition: $props,
+    -webkit-transform $duration;
+    -o-transition: $props,
+    -o-transform $duration;
+    transition: $props,
+    transform $duration;
+}
+
+@keyframes easy-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.util-center {
+    position: relative;
+    z-index: 1;
+    border-color: #b2bac2;
+    width: 3rem;
+    min-height: 3rem;
+    display: flex !important;
+    justify-content: center;
+}
+
+.rs-progress-line {
+    padding: 0;
+}
+
+
+.row {
+    display: flex;
+    gap: 3rem;
+    width: 100%;
+}
+
+.seq {
+    border: 1px;
+    position: relative;
+    z-index: 1;
+    @include seq;
+}
+
+.canvas {
+    position: relative;
+    z-index: 1;
+    @include seq;
+    margin-top: auto;
+}

@@ -1,0 +1,65 @@
+@use 'sass:string' as string;
+
+$hash: '%23';           // #
+$pct: '%25';            // %
+$lesser: '%3C';         // <
+$greater: '%3E';        // >
+$and: '%26';            // &
+$open-bracket: '%7B';   // {
+$close-bracket: '%7D';  // }
+
+@mixin image(
+  $content,
+  $style: null,
+  $view-width: 100,
+  $view-height: 100
+) {
+  $svg:
+    "<svg xmlns='http://www.w3.org/2000/svg'\
+        width='100%'\
+        height='100%'\
+        preserveAspectRatio='none'\
+        viewBox='0 0 #{$view-width} #{$view-height}'>\
+      <style>#{$style}</style>\
+      #{$content}\
+    </svg>";
+
+  // $svg:
+  //   "<svg xmlns='http://www.w3.org/2000/svg'\
+  //       width='100%'\
+  //       height='100%'\
+  //       preserveAspectRatio='none'\
+  //       viewBox='0 0 #{$view-width} #{$view-height}'>\
+  //     <style>#{$style}</style>\
+  //     #{$content}\
+  //   </svg>";
+
+  // mask-image: url("data:image/svg+xml;utf8,#{$svg}");
+  // -webkit-mask-image: url("data:image/svg+xml;utf8,#{$svg}");
+
+  background: {
+    image: url("data:image/svg+xml;utf8,#{$svg}");
+  //   // position: top left;
+  //   // position: 50%;
+    position: top left;
+  //   // size: cover 100%;
+  //   // size: contain;
+  //   // size: cover;
+  //   // size: 100%;
+    repeat: no-repeat;
+  //   // origin: content-box;
+  //   // clip: ;
+  //   // color: black;
+  };
+}
+
+@function line-style($color: #FF7101) {
+  $hex: string.slice(inspect($color), 2);
+  @return
+    ".line {\
+      stroke: #{$hash}#{$hex};\
+      fill: transparent;\
+      stroke-width: 1;\
+      stroke-linejoin: round;\
+    }";
+}
